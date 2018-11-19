@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" ng-app="ShoppingListCheckOff">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+  </head>
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+<body>
+  <div class="container">
+  <h1>Shopping List Check Off</h1>
+
+  <div class="row">
+
+    <!-- To Buy List -->
+    <div class="col-md-6" ng-controller="ToBuyController as ctrbuy">
+     <h2>To Buy:</h2>
+     <ul>
+       <li ng-repeat="item in ctrbuy.tobuylist">
+         Buy {{item.quantity}} of {{item.name}}
+         <button class="btn btn-default" ng-click="ctrbuy.buy($index);">
+           <span class="glyphicon glyphicon-ok"></span>
+            Bought
+         </button>
+       </li>
+     </ul>
+     <div ng-if="ctrbuy.emptyMessage" class="emptyMessage">{{ctrbuy.emptyMessage}}</div>
+    </div>
+
+    <!-- Already Bought List -->
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as ctrbought">
+     <h2>Already Bought:</h2>
+     <ul>
+       <li ng-repeat="item in ctrbought.boughtlist">Bought {{item.quantity}} of {{item.name}}</li>
+     </ul>
+     <div ng-if="ctrbought.isEmpty()" class="emptyMessage">Nothing bought yet.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
